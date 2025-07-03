@@ -1,0 +1,4 @@
+terraform import google_compute_network.my_vpc  velvety-arc-462903-a8/my-vpc
+terraform import google_compute_subnetwork.my_subnetwork velvety-arc-462903-a8/us-central1/my-subnetwork
+terraform import google_compute_firewall.allow_ssh  velvety-arc-462903-a8/allow-ssh
+terraform import google_compute_instance.my_first_vm  velvety-arc-462903-a8/us-central1-a/my-first-vm

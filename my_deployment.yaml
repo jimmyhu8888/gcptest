@@ -1,0 +1,33 @@
+imports:
+- path: templates/vm_template.py
+
+resources:
+- name: my-vpc
+  type: compute.v1.network
+  properties:
+    autoCreateSubnetworks: false
+
+- name: my-subnetwork
+  type: compute.v1.subnetwork
+  properties:
+    ipCidrRange: 10.0.1.0/24
+    network: $(ref.my-vpc.selfLink)
+    region: us-central1
+
+- name: allow-ssh
+  type: compute.v1.firewall
+  properties:
+    network: $(ref.my-vpc.selfLink)
+    sourceRanges:
+    - 0.0.0.0/0
+    allowed:
+    - IPProtocol: tcp
+      ports:
+      - '22'
+
+- name: my-first-vm
+  type: templates/vm_template.py
+  properties:
+    zone: us-central1-a
+    network: my-vpc
+    subnetwork: my-subnetwork
